@@ -1,0 +1,20 @@
+{
+  "name": "icon-font-importer",
+  "version": "0.1",
+  "description": "SASS importer for icon font",
+  "main": "index.js",
+  "repository": "git@github.com:fuminchao/icon-font-importer.git",
+  "author": "Minchao Fu",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "stream-buffers": "^3.0.2",
+    "svg2ttf": "^4.3.0",
+    "svgicons2svgfont": "^9.0.4",
+    "ttf2woff": "^2.0.1",
+    "ttf2woff2": "^3.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0"
+  }
+}
