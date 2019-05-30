@@ -3,21 +3,20 @@
 
 .test-1 {
     &:after {
-        @import 'iconfont+file://./font-solid.svg';
-
-        @at-root {
-            @font-face {
-                font-family: 'sdf';
-                src: url('sdf');
-            }
-        }
+        @import 'iconfont+file://svg/font-solid.svg';
     }
 }
 
 .test-2 {
     &:after {
-        @import 'iconfont+file:///Users/mincfu/github/icon-font-importer/test/font-solid.svg';
+        @import 'iconfont+file:///Users/mincfu/github/icon-font-importer/test/svg/font-solid.svg';
     }
 }
 
-@import 'iconfont+face://woff';
+.test-3-https:after {
+  @import 'iconfont+https://developer.mozilla.org/static/general/external-link.fb3c293b9226.svg';
+}
+
+[class*=test-]:after {
+    @import 'iconfont+face://woff';
+}
