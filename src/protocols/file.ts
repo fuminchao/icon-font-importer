@@ -1,5 +1,3 @@
-"use strict";
-
 import * as fs from 'fs';
 import * as path from 'path';
 import * as sass from 'node-sass';
@@ -15,7 +13,7 @@ function handleFile(this: sass.AsyncContext, svg: string, prev: string) {
   const foundPath = findPaths.find(p => fs.existsSync(path.resolve(p, svg)));
 
   if (foundPath) {
-    console.log(18, path.resolve(foundPath, svg));
+
     return fs.createReadStream(path.resolve(foundPath, svg));
   } else {
     throw new Error('X404:' + svg);

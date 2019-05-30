@@ -17,10 +17,9 @@ export class FontBook {
   private svgStream: WritableStreamBuffer;
 
   constructor(public readonly name: string) {
-    console.log('NewBook');
 
     this.fontStream = new SvgFont({
-      fontName: 'xxxxx',
+      fontName: name,
       normalize: true,
       fontHeight: 2000,
       centerHorizontally: true,
@@ -29,14 +28,6 @@ export class FontBook {
 
     this.svgStream = new WritableStreamBuffer();
     this.fontStream.pipe(this.svgStream);
-
-    // this.fontStream.pipe(fs.createWriteStream('/Users/mincfu/temp/hello.svg'))
-    // .on('finish',function() {
-    //   console.log('Font successfully created!')
-    // })
-    // .on('error',function(err) {
-    //   console.log(err);
-    // });
 
     this.glyphIndex = parseInt('E000', 16) - 1;
   }
