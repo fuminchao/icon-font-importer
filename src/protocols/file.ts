@@ -13,8 +13,8 @@ function handleFile(this: sass.AsyncContext, svg: string, prev: string) {
   const foundPath = findPaths.find(p => fs.existsSync(path.resolve(p, svg)));
 
   if (foundPath) {
-
-    return fs.createReadStream(path.resolve(foundPath, svg));
+    const sourceUrl = path.resolve(foundPath, svg);
+    return {sourceUrl, open: () => fs.createReadStream(path.resolve(foundPath, svg))};
   } else {
     throw new Error('X404:' + svg);
   }

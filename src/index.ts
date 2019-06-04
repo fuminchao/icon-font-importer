@@ -20,21 +20,21 @@ function importSVG(svg: string, prev: string, sass: sass.Context) {
   });
 }
 
-const hackCallback = _.memoize((sf, scss) => {
-
-  const oc = scss.callback;
-
-  scss.callback = function () {
-    // console.log('callback', arguments);
-
-    return oc.apply(this, arguments);
-  };
-});
+let symbolOCallback = Symbol("sass.SymbolOCallback");
 
 const importSvgAsIconFont: sass.AsyncImporter = function(url, prev, done) {
 
+  if ((this as any)[symbolOCallback] === undefined) {
+    (this as any)[symbolOCallback] = this.callback;
+
+    this.callback = function () {
+      console.log('callback', arguments);
+      return (this as any)[symbolOCallback].apply(this, arguments);
+    };
+  }
+
+  console.log(36, Object.prototype.toString.apply(this));
   // TODO stdin == this.options.data
-  hackCallback(this.options.file, this);
 
   const tokens = /^iconfont\+(.*)$/.exec(url) || [];
   if (tokens.length > 0) {

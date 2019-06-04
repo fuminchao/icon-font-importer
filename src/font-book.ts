@@ -7,7 +7,6 @@ import {once} from 'lodash-decorators';
 
 const ttf2woff = require('ttf2woff');
 
-import * as fs from 'fs';
 import {noop} from 'lodash';
 
 export class FontBook {
@@ -15,6 +14,8 @@ export class FontBook {
   private fontStream: SvgFont;
   private glyphIndex: number;
   private svgStream: WritableStreamBuffer;
+
+  private glyphs: {[sourceUrl: string]: number} = {};
 
   constructor(public readonly name: string) {
 
@@ -32,25 +33,37 @@ export class FontBook {
     this.glyphIndex = parseInt('E000', 16) - 1;
   }
 
+
   write(g: GlyphStream): Promise<number> {
 
-    this.glyphIndex++;
+    if (!this.glyphs[g.sourceUrl]) {
 
-    g.metadata = {
-      unicode: [String.fromCharCode(this.glyphIndex)],
-      name: 'i' + this.glyphIndex,
-    };
+      const index = ++this.glyphIndex;
+      this.glyphs[g.sourceUrl] = index;
 
-    return new Promise((r, j) => {
+      return Promise.resolve(g.open()).then(sm => {
 
-      this.fontStream.write(g, (err) => {
-        if (err) {
-          j(err);
-        } else {
-          r(this.glyphIndex);
-        }
-      });
-    });
+        (sm as any).metadata = {
+          unicode: [String.fromCharCode(this.glyphIndex)],
+          name: 'i' + this.glyphIndex,
+        };
+        return sm;
+
+      }).then(sm => new Promise((r, j) => {
+
+        this.fontStream.write(sm, (err) => {
+          if (err) {
+            j(err);
+          } else {
+            r(this.glyphIndex);
+          }
+        });
+      }));
+
+    } else {
+      return Promise.resolve(this.glyphs[g.sourceUrl]);
+    }
+
   }
 
   @once
@@ -71,9 +84,7 @@ export class FontBook {
   }
 }
 
-export interface GlyphStream extends Readable {
-  metadata: {
-    unicode?: string[],
-    name: string,
-  }
+export interface GlyphStream {
+  sourceUrl: string,
+  open(): Readable,
 }
