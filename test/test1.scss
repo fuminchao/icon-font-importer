@@ -7,16 +7,22 @@
     }
 }
 
-.test-2 {
+.test-2a,
+.test-2b
+{
     &:after {
         @import 'iconfont+file:///Users/mincfu/github/icon-font-importer/test/svg/font-solid.svg';
     }
 }
 
 .test-3-https:after {
-  @import 'iconfont+https://developer.mozilla.org/static/general/external-link.fb3c293b9226.svg';
+  //@import 'iconfont+https://developer.mozilla.org/static/general/external-link.fb3c293b9226.svg';
 }
 
 [class*=test-]:after {
-    @import 'iconfont+face://woff';
+    @import 'iconfont+face://woff2+woff+ttf';
+}
+
+a[class*=test-]:after {
+  @import 'iconfont+face://woff2+woff+ttf';
 }
