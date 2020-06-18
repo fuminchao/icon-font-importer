@@ -21,5 +21,6 @@
 ```
 
 ```Bash
+npx tsc;
 npx node-sass --output test --importer=./build/index.js test/test1.scss
 ```
