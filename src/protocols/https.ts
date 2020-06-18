@@ -7,7 +7,10 @@ function handleHttps(this: sass.AsyncContext, svg: string, prev: string) {
   return new Promise((r, j) => {
 
     const req = https.request('https://' + svg, (res) => {
-      r(Object.assign(res, {sourceUrl: 'https://' + svg}));
+      r({
+        sourceUrl: 'https://' + svg,
+        open: () => res,
+      });
     });
 
     req.on('error', j);
