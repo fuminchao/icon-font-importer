@@ -19,3 +19,7 @@
   @import 'iconfont+face://woff2+woff';
 }
 ```
+
+```Bash
+npx node-sass --output test --importer=./build/index.js test/test1.scss
+```
