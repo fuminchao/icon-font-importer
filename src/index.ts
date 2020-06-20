@@ -28,12 +28,10 @@ const importSvgAsIconFont: sass.AsyncImporter = function(url, prev, done) {
     (this as any)[symbolOCallback] = this.callback;
 
     this.callback = function () {
-      console.log('callback', arguments);
       return (this as any)[symbolOCallback].apply(this, arguments);
     };
   }
 
-  console.log(36, Object.prototype.toString.apply(this));
   // TODO stdin == this.options.data
 
   const tokens = /^iconfont\+(.*)$/.exec(url) || [];
