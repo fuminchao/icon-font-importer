@@ -23,11 +23,9 @@ var importSvgAsIconFont = function (url, prev, done) {
     if (this[symbolOCallback] === undefined) {
         this[symbolOCallback] = this.callback;
         this.callback = function () {
-            console.log('callback', arguments);
             return this[symbolOCallback].apply(this, arguments);
         };
     }
-    console.log(36, Object.prototype.toString.apply(this));
     // TODO stdin == this.options.data
     var tokens = /^iconfont\+(.*)$/.exec(url) || [];
     if (tokens.length > 0) {
