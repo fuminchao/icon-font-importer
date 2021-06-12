@@ -10,7 +10,7 @@
     "sass": "node_modules/.bin/node-sass -o test/ --importer=./build/index.js"
   },
   "dependencies": {
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "lodash-decorators": "^6.0.1",
     "stream-buffers": "^3.0.2",
     "svg2ttf": "^4.3.0",
