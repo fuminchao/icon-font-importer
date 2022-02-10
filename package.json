@@ -25,7 +25,7 @@
     "@types/node-sass": "^4.11.0",
     "@types/stream-buffers": "^3.0.3",
     "@types/ttf2woff2": "^2.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "typescript": "^3.5.1"
   }
 }
